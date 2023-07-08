@@ -22,7 +22,6 @@ header{
     i{
       color: $color-main;
     }
-
   }
   nav > a{
     width: 5%;
@@ -129,7 +128,7 @@ main{
 // order
 .order{
   text-align: center;
-  padding: 0 60px;
+  padding: 50px 60px;
   h3{
     font-size: 4rem;
     margin: 30px;
@@ -158,14 +157,13 @@ main{
       font-family: $font-lato;
       color: $color-text;
     }
-    
-  
   }
 
   .gallery{
     grid-template-columns: repeat(4,1fr);
     display: grid;
     width: 100%;
+    gap: 20px;
 
     @mixin galleryStyle($url){
       background: url($url) center/cover;
@@ -178,8 +176,17 @@ main{
         left: -100%;
         width: 100%;
         height: 100%;
-        background-color: white;
+        background-color: rgba($color: $color-text, $alpha: 0.5);
         transition: 1s;
+        display: flex;
+        flex-direction: column;
+        color: white;
+        font-size: 2rem;
+        font-family: $font-lato;
+        justify-content: center;
+        .stars{
+          color: $color-star;
+        }
       }
       &:hover .gallery-overlay{
         left: 0;
@@ -205,12 +212,14 @@ main{
   }
 
   ul{
-    width: 100%;
-    margin-right: auto;
-    margin-left: auto;
-  }
-  ul > *{
-    float: left;
+    width: 15%;
+    margin: 20px auto;
+    color: $color-main;
+    *{
+      float: left;
+      width: 15%;
+      font-size: 2rem;
+    }
   }  
 }
 
@@ -220,25 +229,58 @@ main{
 .book{
   background: url(https://source.unsplash.com/ThtzElwvwyM);
   text-align: center;
-
-  i, span, a{
+  padding: 50px 100px;
+  *{
     display: block;
+    margin-bottom: 10px;
+  }
+  h2{
+    font-size: 1.5rem;
+    font-family: $font-lato;
+    color: $color-main;
+    margin-bottom: 15px;
+  }
+  h3{
+    font-size: 4rem;
+    font-family: $font-playFair;
+    margin-bottom: 20px;
+  }
+  i{
+    font-size: 4rem;
+    color: $color-main;
+    border: 1px solid $color-main;
+    border-radius: 50%;
+    padding: 10px;
+    display: inline-block;
+  }
+  span{
+    font-family: $font-lato;
+    font-size: 1.5rem;
+  }
+  a{
+    color: $color-main;
+    font-family: $font-playFair;
+    font-size: 3rem;
+    text-decoration: none;
   }
   section{
     float: left;
     width: 50%;
-
-    span{
-      // display: block;
+    .time{
+      font-family: $font-playFair;
     }
   }
   img{
-    // padding: 30px;
+    width: 80%;
+    margin: 30px auto;
   }
 
 }
 
 // footer
 footer{
-  text-align: center;
+    font-family: $font-lato;
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 20px
 }
