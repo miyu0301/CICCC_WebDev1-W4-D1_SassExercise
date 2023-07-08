@@ -1,6 +1,50 @@
 // @use 'base' as *;
 
+// breakpoint
+@mixin tab{
+  @media screen and (max-width: 1131px){
+    @content;
+  }
+}
+
 // header
+header{
+  nav *{
+    float: left;
+  }
+  a{
+    text-decoration: none;
+    font-size: 1.5rem;
+    margin: 20px 15px;
+    font-family: $font-lato;
+    color: $color-text;
+
+    i{
+      color: $color-main;
+    }
+
+  }
+  nav > a{
+    width: 5%;
+  }
+  ul li:visited{
+    color: $color-text;
+  }
+  li{
+    @include tab{
+      display: none;
+    }
+  }
+  .hamburger{
+    display: none;
+  }
+  .hamburger{
+    @include tab{
+      display: inline;
+    }
+  }
+
+}
 // welcome
 main{
   background: linear-gradient(
@@ -9,9 +53,6 @@ main{
     ), url(https://images.unsplash.com/photo-1479044769763-c28e05b5baa5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80) no-repeat center/cover;
   height: 100vh;
 
-  nav *{
-    float: left;
-  }
   .welcome{
     display: flex;
     flex-direction: column;
@@ -23,9 +64,24 @@ main{
   
   h1{
     font-family: $font-playFair;
+    font-size: 5rem;
   }
   form{
     font-family: $font-lato;
+    margin: 10px;
+    display: flex;
+    * {
+      padding: 10px;
+      border: none;
+    }
+    input{
+      border-radius: 5px 0 0 5px;      
+    }
+    select{
+      border-radius: 0 5px 5px 0;
+      background-color: rgb(255, 136, 0);
+      color: white;
+    }
   }
 }
 // about
@@ -33,17 +89,77 @@ main{
   background: url(../images/about.png);
   height: 600px;
   background-size: cover;
-  padding-left: 400px;
-  padding-top: 300px;
+  padding: 100px 100px 0 500px;
+  font-family: $font-lato;
+
+  @function adjustFontSize($rate: 1){
+    @return $rate * 16px
+  }
+
+  h2{
+    font-size: adjustFontSize(1);
+    color: $color-main;
+    margin-bottom: 15px;
+  }
+  h3{
+    font-size: adjustFontSize(3);
+    font-family: $font-playFair;
+    margin-bottom: 20px;
+  }
+  p{
+    font-size: adjustFontSize(1);
+    margin-bottom: 50px;
+    line-height: 30px;
+  }
+  a{
+    font-size: adjustFontSize(1);
+    background-color: $color-main;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    span{
+      margin-left: 10px;
+      background-color: $color-accent;
+    }
+  }
 }
 
 
 // order
 .order{
   text-align: center;
-
-  .cuisine li{
-    float: left;
+  padding: 0 60px;
+  h3{
+    font-size: 4rem;
+    margin: 30px;
+    font-family: $font-playFair;
+  }
+  .cuisine{
+    width: 60%;
+    margin: 30px auto;
+    li{
+      float: left;
+      width: 20%;
+      padding: 20px;
+      margin-bottom: 10px;
+      border-bottom: 2px $color-grey solid;
+      &:first-child{
+        border-bottom: 2px $color-main solid;
+        a{
+          color: $color-main;
+        }
+      }
+    }
+    a{
+      text-decoration: none;
+      font-size: 1.5rem;
+      margin: 20px 15px;
+      font-family: $font-lato;
+      color: $color-text;
+    }
+    
+  
   }
 
   .gallery{
@@ -51,8 +167,8 @@ main{
     display: grid;
     width: 100%;
 
-    .img01{
-      background: url(https://source.unsplash.com/fdlZBWIP0aM) center/cover;
+    @mixin galleryStyle($url){
+      background: url($url) center/cover;
       height: 200px;
       overflow: hidden;
       position: relative;
@@ -65,11 +181,37 @@ main{
         background-color: white;
         transition: 1s;
       }
+      &:hover .gallery-overlay{
+        left: 0;
+      }
     }
-    .img01:hover .gallery-overlay{
-      left: 0;
+
+    $urls: 'https://source.unsplash.com/fdlZBWIP0aM',
+    'https://source.unsplash.com/mmnKI8kMxpc',
+    'https://source.unsplash.com/WbA_PCv3_Co',
+    'https://source.unsplash.com/SH6vc3VOOwE',
+    'https://source.unsplash.com/ohnRXPYXDEE',
+    'https://source.unsplash.com/j3gz0KReZbA',
+    'https://source.unsplash.com/FFqNATH27EM',
+    'https://source.unsplash.com/RwoKbjJdYvE';
+
+    $i: 1;
+    @each $url in $urls{
+      .img0#{$i}{
+        @include galleryStyle($url)
+      }
+      $i: $i + 1;
     }
   }
+
+  ul{
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  ul > *{
+    float: left;
+  }  
 }
 
 // gallery
@@ -78,6 +220,22 @@ main{
 .book{
   background: url(https://source.unsplash.com/ThtzElwvwyM);
   text-align: center;
+
+  i, span, a{
+    display: block;
+  }
+  section{
+    float: left;
+    width: 50%;
+
+    span{
+      // display: block;
+    }
+  }
+  img{
+    // padding: 30px;
+  }
+
 }
 
 // footer
